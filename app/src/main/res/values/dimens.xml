@@ -1,0 +1,30 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="about_background_image_height">250dp</dimen>
+    <dimen name="about_head_image_size">100dp</dimen>
+    <dimen name="about_padding_left">36dp</dimen>
+    <dimen name="about_name_padding_top">50dp</dimen>
+    <dimen name="about_occupation_padding_top">85dp</dimen>
+    <dimen name="about_section_title_padding_bottom">5dp</dimen>
+    <dimen name="about_section_details_padding_bottom">16dp</dimen>
+    <dimen name="about_button_margin_top">32dp</dimen>
+    <dimen name="about_button_padding">16dp</dimen>
+
+    <dimen name="experience_card_content_padding">10dp</dimen>
+
+    <dimen name="logo_padding_top">10dp</dimen>
+
+    <dimen name="project_card_margin">5dp</dimen>
+    <dimen name="project_image_height">200dp</dimen>
+    <dimen name="project_image_padding">5dp</dimen>
+    <dimen name="project_card_content_padding">10dp</dimen>
+
+    <dimen name="navigate_mapview_height">250dp</dimen>
+    <dimen name="navigate_description_padding_top">36dp</dimen>
+
+
+</resources>
