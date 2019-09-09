@@ -1,4 +1,5 @@
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -20,7 +21,7 @@ class AboutPersonalDetail : Fragment() {
 
 
     // it is used to pass the request code to check on the permission result
-    private val PERMISSION_CALL_REQUEST = 123
+    private val permissionCallRequest = 123
     var name: TextView? = null
     var designation: TextView? = null
     var summary: TextView? = null
@@ -85,7 +86,7 @@ class AboutPersonalDetail : Fragment() {
             ActivityCompat.requestPermissions(
                 activity!!,
                 arrayOf(Manifest.permission.CALL_PHONE),
-                PERMISSION_CALL_REQUEST
+                permissionCallRequest
             )
         } else {
 
@@ -114,7 +115,7 @@ class AboutPersonalDetail : Fragment() {
         requestCode: Int, permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PERMISSION_CALL_REQUEST) {
+        if (requestCode == permissionCallRequest) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 callAction()
             }
@@ -133,9 +134,11 @@ class AboutPersonalDetail : Fragment() {
                     setData(about)
                 }
             }
-
             override fun onFailure(call: Call<About>?, t: Throwable?) {
-                var error = "wewefewewf"
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle(getString(R.string.heading_msg))
+                builder.setMessage(getString(R.string.error_msg))
+                builder.show()
             }
         })
     }
