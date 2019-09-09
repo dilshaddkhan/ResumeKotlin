@@ -1,4 +1,5 @@
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.resume.R
+import com.example.resume.util.CheckInternet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,16 +22,16 @@ class AboutPersonalDetail : Fragment() {
 
 
     // it is used to pass the request code to check on the permission result
-    private val PERMISSION_CALL_REQUEST = 123
+    private val permissionCallRequest = 123
     var name: TextView? = null
     var designation: TextView? = null
     var summary: TextView? = null
     var interest: TextView? = null
     var linkedin: TextView? = null
     var github: TextView? = null
-    var skillText:TextView?=null
-    var number:String?=null
-    var email:String?=null
+    var skillText: TextView? = null
+    var number: String? = null
+    var email: String? = null
 
     // this function is used to return the object of the AboutPersonalDetail fragment
     companion object {
@@ -58,7 +60,7 @@ class AboutPersonalDetail : Fragment() {
         interest = rootView.findViewById(R.id.interest) as TextView
         linkedin = rootView.findViewById(R.id.linkedin) as TextView
         github = rootView.findViewById(R.id.github) as TextView
-        skillText=rootView.findViewById(R.id.skill) as TextView
+        skillText = rootView.findViewById(R.id.skill) as TextView
         // handling the click listener of call button
         callMe.setOnClickListener {
             // this method will get call when user click on the call button to call on the number
@@ -69,7 +71,13 @@ class AboutPersonalDetail : Fragment() {
             // this method is used to handle the email action which will get invoke once user click on the email button
             emailAction()
         }
-        loadAboutData()
+        if (CheckInternet.checkConnection(context)) {
+            loadAboutData()
+        } else {
+            var message=getString(R.string.internet_error)
+            showAlertPopup(message)
+        }
+
         return rootView
     }
 
@@ -85,7 +93,7 @@ class AboutPersonalDetail : Fragment() {
             ActivityCompat.requestPermissions(
                 activity!!,
                 arrayOf(Manifest.permission.CALL_PHONE),
-                PERMISSION_CALL_REQUEST
+                permissionCallRequest
             )
         } else {
 
@@ -114,7 +122,7 @@ class AboutPersonalDetail : Fragment() {
         requestCode: Int, permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (requestCode == PERMISSION_CALL_REQUEST) {
+        if (requestCode == permissionCallRequest) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 callAction()
             }
@@ -135,7 +143,8 @@ class AboutPersonalDetail : Fragment() {
             }
 
             override fun onFailure(call: Call<About>?, t: Throwable?) {
-                var error = "wewefewewf"
+                var message=getString(R.string.error_msg)
+                showAlertPopup(message)
             }
         })
     }
@@ -143,15 +152,22 @@ class AboutPersonalDetail : Fragment() {
 
     private fun setData(about: About) {
         if (about != null) {
-            number=about.phone
-            email=about.email
+            number = about.phone
+            email = about.email
             interest!!.text = about!!.interests
             name!!.text = about!!.name
             summary!!.text = about!!.summary
             designation!!.text = about!!.designation
             github!!.text = about!!.gitHUbProfile
             linkedin!!.text = about!!.linkedInProfile
-            skillText!!.text=about!!.skills
+            skillText!!.text = about!!.skills
         }
+    }
+
+    private fun showAlertPopup(message:String){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.heading_msg))
+        builder.setMessage(message)
+        builder.show()
     }
 }

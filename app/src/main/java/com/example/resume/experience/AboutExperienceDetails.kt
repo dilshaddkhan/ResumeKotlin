@@ -1,3 +1,4 @@
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resume.R
+import com.example.resume.util.CheckInternet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +39,13 @@ class AboutExperienceDetails : Fragment() {
 
         // this will initialise the recycler view
         experience_container = rootView.findViewById(R.id.experience_container) as RecyclerView // Add this
-        loadExperienceData()
+        if (CheckInternet.checkConnection(context)) {
+            loadExperienceData()
+        } else {
+            var message=getString(R.string.internet_error)
+            showAlertPopup(message)
+        }
+
         return rootView
 
     }
@@ -56,7 +64,8 @@ class AboutExperienceDetails : Fragment() {
             }
 
             override fun onFailure(call: Call<Experiences>?, t: Throwable?) {
-                var error = "wewefewewf"
+                var message=getString(R.string.error_msg)
+                showAlertPopup(message)
             }
         })
     }
@@ -72,5 +81,12 @@ class AboutExperienceDetails : Fragment() {
             //passig the adapter to the recycler view
             experience_container?.adapter = myExperienceAdapter
         }
+    }
+
+    private fun showAlertPopup(message:String){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.heading_msg))
+        builder.setMessage(message)
+        builder.show()
     }
 }
