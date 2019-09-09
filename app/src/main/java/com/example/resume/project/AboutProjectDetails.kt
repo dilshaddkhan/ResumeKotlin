@@ -1,3 +1,4 @@
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.resume.R
+import com.example.resume.util.CheckInternet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +36,12 @@ class AboutProjectDetails : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_project, container, false)
         // this will initialise the recycler view for project container
         project_container = rootView.findViewById(R.id.project_container) as RecyclerView // Add this
-        loadProjectData()
+        if (CheckInternet.checkConnection(context)) {
+            loadProjectData()
+        } else {
+            var message=getString(R.string.internet_error)
+            showAlertPopup(message)
+        }
         return rootView
 
     }
@@ -52,7 +59,8 @@ class AboutProjectDetails : Fragment() {
             }
 
             override fun onFailure(call: Call<Project>?, t: Throwable?) {
-                var error = "wewefewewf"
+                var message=getString(R.string.error_msg)
+                showAlertPopup(message)
             }
         })
     }
@@ -69,4 +77,10 @@ class AboutProjectDetails : Fragment() {
         }
     }
 
+    private fun showAlertPopup(message:String){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.heading_msg))
+        builder.setMessage(message)
+        builder.show()
+    }
 }

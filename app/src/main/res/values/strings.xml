@@ -13,6 +13,7 @@
     <string name="send_mail">Send email…</string>
     <string name="technology_used">Technology Used</string>
     <string name="error_msg">Something went wrong please try again</string>
+    <string name="internet_error">Please check your internet </string>
     <string name="heading_msg">OOPs!!!</string>
 
 </resources>
