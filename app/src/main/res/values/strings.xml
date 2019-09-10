@@ -13,8 +13,11 @@
     <string name="send_mail">Send email…</string>
     <string name="technology_used">Technology Used</string>
     <string name="error_msg">Something went wrong please try again</string>
-    <string name="internet_error">Please check your internet </string>
+    <string name="internet_error">Please check your internet</string>
     <string name="heading_msg">OOPs!!!</string>
-
+    <string name="empty_input_box">Please fill the respective field</string>
+    <string name="invalid_email">Please input valid email address</string>
+    <string name="resume_preference">ResumePreference</string>
+    <string name="verified_user">Verified User</string>
 </resources>
 
