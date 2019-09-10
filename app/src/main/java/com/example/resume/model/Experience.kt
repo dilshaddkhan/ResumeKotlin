@@ -1,5 +1,9 @@
 import com.google.gson.annotations.SerializedName
 
+
+/**
+ * this data class is the model class for the each Experience information of a company  of resume
+ */
 data class Experience (
 
 	@SerializedName("company") val company : String,
