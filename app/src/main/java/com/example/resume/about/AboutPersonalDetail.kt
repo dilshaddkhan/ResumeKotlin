@@ -144,7 +144,6 @@ class AboutPersonalDetail : Fragment() {
 
         Picasso.with(context).load(about.profilepic).resize(150, 150).centerInside()
             .into(profilePic)
-
     }
 
     //this method is used to show the alert dialogue with respect to the event
@@ -201,4 +200,5 @@ class AboutPersonalDetail : Fragment() {
             }
         }
     }
+
 }
