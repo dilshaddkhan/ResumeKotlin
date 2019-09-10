@@ -12,5 +12,5 @@ interface ResumeServiceInterface {
     fun getExperience():Call<Experiences>
 
     @GET("MyResumeJSON/projects")
-    fun getProject():Call<Project>
+    fun getProject():Call<Projects>
 }

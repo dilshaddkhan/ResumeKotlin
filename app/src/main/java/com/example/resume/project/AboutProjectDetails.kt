@@ -38,7 +38,13 @@ class AboutProjectDetails : Fragment() {
         // this is used to invoke the fragment_project ui xml layout
         val rootView = inflater.inflate(R.layout.fragment_project, container, false)
         // this will initialise the recycler view for project container
+        initializeView(rootView)
+        return rootView
 
+    }
+
+    // this method is used to initialize the ui
+    private fun initializeView(rootView:View){
         // Create progressBar dynamically...
         progressBar = ProgressBar(context)
         progressBar!!.layoutParams =
@@ -58,16 +64,15 @@ class AboutProjectDetails : Fragment() {
             progressBar!!.visibility = visibility
             showAlertPopup(message)
         }
-        return rootView
-
     }
+
 
     //this method will load the project data from the server
     private fun loadProjectData() {
         val resumeServiceInterface = ServiceBuilder.buildService(ResumeServiceInterface::class.java)
         val requestCall = resumeServiceInterface.getProject()
-        requestCall.enqueue(object : Callback<Project> {
-            override fun onResponse(call: Call<Project>?, response: Response<Project>?) {
+        requestCall.enqueue(object : Callback<Projects> {
+            override fun onResponse(call: Call<Projects>?, response: Response<Projects>?) {
 
                 if (response?.isSuccessful!!) {
                     val project = response.body()
@@ -77,7 +82,7 @@ class AboutProjectDetails : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<Project>?, t: Throwable?) {
+            override fun onFailure(call: Call<Projects>?, t: Throwable?) {
                 var message=getString(R.string.error_msg)
                 val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
                 progressBar!!.visibility = visibility
@@ -87,13 +92,13 @@ class AboutProjectDetails : Fragment() {
     }
 
     //this method will set the pass the project data to the project adapter
-    private fun setProjectData(project: Project) {
+    private fun setProjectData(project: Projects) {
         if (project !=null){
-            val totalProject = project.projects
+            val totalProject = project.project
             //  this will provide the layout to the recycler view
-            projectContainer!!.layoutManager = LinearLayoutManager(activity)
+            projectContainer!!.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
             // initialising the ProjectAdapter class to pass the context and the data to render on the UI
-            val myProjectAdapter = ProjectAdapter(context!!, totalProject,ProjectsImagesSupplier.projects)
+            val myProjectAdapter = ProjectAdapter(context!!, totalProject)
             //passig the adapter to the recycler view
             projectContainer!!.adapter = myProjectAdapter
         }

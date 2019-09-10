@@ -35,10 +35,11 @@
                     diagonal:diagonal_position="bottom">
 
                 <ImageView
+                        android:id="@+id/background"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/about_background"/>
+                        android:scaleType="centerCrop"/>
+
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -61,12 +62,11 @@
             </com.github.florent37.diagonallayout.DiagonalLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/avatar"
+                    android:id="@+id/profile"
                     android:layout_width="@dimen/about_head_image_size"
                     android:layout_height="@dimen/about_head_image_size"
                     android:layout_marginLeft="@dimen/about_padding_left"
-                    android:layout_gravity="bottom|left"
-                    android:src="@drawable/profile_pic"/>
+                    android:layout_gravity="bottom|left"/>
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

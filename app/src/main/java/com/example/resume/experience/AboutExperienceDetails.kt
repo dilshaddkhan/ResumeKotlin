@@ -39,7 +39,13 @@ class AboutExperienceDetails : Fragment() {
 
         // this is used to invoke the fragment_experience ui xml layout
         val rootView = inflater.inflate(R.layout.fragment_experience, container, false)
+        initializeView(rootView)
+        return rootView
 
+    }
+
+    // this method is used to initialize the ui
+    private fun initializeView(rootView:View){
         // Create progressBar dynamically...
         progressBar = ProgressBar(context)
         progressBar!!.layoutParams =
@@ -59,9 +65,6 @@ class AboutExperienceDetails : Fragment() {
             progressBar!!.visibility = visibility
             showAlertPopup(message)
         }
-
-        return rootView
-
     }
 
 
@@ -93,16 +96,13 @@ class AboutExperienceDetails : Fragment() {
 
     //this method will set the pass the experience data to the Experience adapter
     private fun setExperienceData(experiences: Experiences) {
-
-        if (experiences != null) {
             val listOfExperience = experiences.experience
             //  this will provide the layout to the recycler view
             experienceContainer?.layoutManager = LinearLayoutManager(activity)
             // initialising the ExperienceAdapter class to pass the context and the data to render on the UI
-            val myExperienceAdapter = ExperienceAdapter(context!!, listOfExperience, CompanyLogoSupplier.logo)
+            val myExperienceAdapter = ExperienceAdapter(context!!, listOfExperience)
             //passig the adapter to the recycler view
             experienceContainer?.adapter = myExperienceAdapter
-        }
     }
 
     //this method is used to show the alert dialogue with respect to the event
