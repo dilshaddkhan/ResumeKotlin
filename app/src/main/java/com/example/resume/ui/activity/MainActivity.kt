@@ -1,10 +1,11 @@
-package com.example.resume
+package com.example.resume.ui.activity
 
 import AboutExperienceDetails
 import AboutPersonalDetail
 import AboutProjectDetails
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.resume.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
