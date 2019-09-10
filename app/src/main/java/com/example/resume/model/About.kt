@@ -6,6 +6,8 @@ data class About (
 	@SerializedName("designation") val designation : String,
 	@SerializedName("email") val email : String,
 	@SerializedName("phone") val phone : String,
+	@SerializedName("profilepic") val profilepic : String,
+	@SerializedName("backgroundimage") val backgroundimage : String,
 	@SerializedName("linkedInProfile") val linkedInProfile : String,
 	@SerializedName("gitHUbProfile") val gitHUbProfile : String,
 	@SerializedName("summary") val summary : String,

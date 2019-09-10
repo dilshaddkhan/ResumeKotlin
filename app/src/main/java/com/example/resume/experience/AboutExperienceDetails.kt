@@ -3,6 +3,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +26,8 @@ class AboutExperienceDetails : Fragment() {
         }
     }
 
-    var experience_container: RecyclerView? = null
+    private var experienceContainer: RecyclerView? = null
+    private var progressBar: ProgressBar? = null
 
 
     // this is used to create the UI of it
@@ -36,21 +39,36 @@ class AboutExperienceDetails : Fragment() {
 
         // this is used to invoke the fragment_experience ui xml layout
         val rootView = inflater.inflate(R.layout.fragment_experience, container, false)
-
-        // this will initialise the recycler view
-        experience_container = rootView.findViewById(R.id.experience_container) as RecyclerView // Add this
-        if (CheckInternet.checkConnection(context)) {
-            loadExperienceData()
-        } else {
-            var message=getString(R.string.internet_error)
-            showAlertPopup(message)
-        }
-
+        initializeView(rootView)
         return rootView
 
     }
 
+    // this method is used to initialize the ui
+    private fun initializeView(rootView:View){
+        // Create progressBar dynamically...
+        progressBar = ProgressBar(context)
+        progressBar!!.layoutParams =
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val linearLayout = rootView.findViewById<LinearLayout>(R.id.rootContainer)
+        // Add ProgressBar to LinearLayout
+        linearLayout?.addView(progressBar)
+        progressBar!!.visibility
 
+        // this will initialise the recycler view
+        experienceContainer = rootView.findViewById(R.id.experience_container) as RecyclerView // Add this
+        if (CheckInternet.checkConnection(context)) {
+            loadExperienceData()
+        } else {
+            var message = getString(R.string.internet_error)
+            val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+            progressBar!!.visibility = visibility
+            showAlertPopup(message)
+        }
+    }
+
+
+    //this method will load the experience data from the server
     private fun loadExperienceData() {
         val resumeServiceInterface = ServiceBuilder.buildService(ResumeServiceInterface::class.java)
         val requestCall = resumeServiceInterface.getExperience()
@@ -60,30 +78,35 @@ class AboutExperienceDetails : Fragment() {
                 if (response?.isSuccessful!!) {
                     val experiences = response.body()
                     setExperienceData(experiences)
+                    val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+                    progressBar!!.visibility = visibility
+
                 }
             }
 
             override fun onFailure(call: Call<Experiences>?, t: Throwable?) {
-                var message=getString(R.string.error_msg)
+                var message = getString(R.string.error_msg)
+                val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+                progressBar!!.visibility = visibility
                 showAlertPopup(message)
             }
         })
     }
 
-    private fun setExperienceData(experiences: Experiences) {
 
-        if (experiences != null) {
-           val listOfExperience = experiences.experience
+    //this method will set the pass the experience data to the Experience adapter
+    private fun setExperienceData(experiences: Experiences) {
+            val listOfExperience = experiences.experience
             //  this will provide the layout to the recycler view
-            experience_container?.layoutManager = LinearLayoutManager(activity)
+            experienceContainer?.layoutManager = LinearLayoutManager(activity)
             // initialising the ExperienceAdapter class to pass the context and the data to render on the UI
-            val myExperienceAdapter = ExperienceAdapter(context!!, listOfExperience,CompanyLogoSupplier.logo)
+            val myExperienceAdapter = ExperienceAdapter(context!!, listOfExperience)
             //passig the adapter to the recycler view
-            experience_container?.adapter = myExperienceAdapter
-        }
+            experienceContainer?.adapter = myExperienceAdapter
     }
 
-    private fun showAlertPopup(message:String){
+    //this method is used to show the alert dialogue with respect to the event
+    private fun showAlertPopup(message: String) {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.heading_msg))
         builder.setMessage(message)

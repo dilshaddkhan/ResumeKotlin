@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.project_item.view.*
 
 // creating the adapter class for the Project fragment and passing two parameters to its object
 
-class ProjectAdapter(var context: Context,var projects: List<Projects>, var projectImages: List<ProjectsImages>) :
+class ProjectAdapter(var context: Context,var projects: List<Project>) :
     RecyclerView.Adapter<ProjectAdapter.MyProjectViewHolder>() {
 
 
@@ -22,25 +22,23 @@ class ProjectAdapter(var context: Context,var projects: List<Projects>, var proj
 
     // this will provide the total no of counts
     override fun getItemCount(): Int {
-        return projectImages.size
+        return projects.size
     }
 
     //with the help of this we are binding the data to the view
     override fun onBindViewHolder(p0: MyProjectViewHolder, p1: Int) {
-
         //this will return the object of project class
-        val projectImages = projectImages.get(p1)
         val projects = projects.get(p1)
 
         // with the help of this we are passing the project data to set on the ui fields
-        p0.setData(projects, projectImages)
+        p0.setData(projects)
     }
 
     // inner class to create the custom ui for the adapter of recycler view
     inner class MyProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // setting of each ProjectsImages data
-        fun setData(projects: Projects?, projectsImages: ProjectsImages?) {
+        fun setData(projects: Project?) {
 
             // initialising and setting the projectsImages title
             itemView.project_title.text = projects!!.projectName
@@ -48,13 +46,12 @@ class ProjectAdapter(var context: Context,var projects: List<Projects>, var proj
             itemView.project_playstore_link.text = projects!!.playStoreLink
             itemView.technology_used.text=projects!!.technologies
             // initialising and setting the projectsImages logo
-            Picasso.with(itemView.context).load(projectsImages!!.logo).resize(80, 80).centerInside().into(itemView.project_logo)
-            //Glide.with(itemView.context).load("https://s3.amazonaws.com/appsdeveloperblog/Micky.jpg").into(itemView.project_logo)
-
+            Picasso.with(itemView.context).load(projects.companylogo).resize(150, 150).centerInside().into(itemView.project_logo)
             // initialising and setting the projectsImages images
-            Picasso.with(context).load(projectsImages.images.get(0)).fit().centerCrop().into(itemView.image_1)
-            Picasso.with(context).load(projectsImages.images.get(1)).fit().centerCrop().into(itemView.image_2)
-            Picasso.with(context).load(projectsImages.images.get(2)).fit().centerCrop().into(itemView.image_3)
+            val urlList=projects.uRLS
+            Picasso.with(context).load(urlList.url1).fit().centerCrop().into(itemView.image_1)
+            Picasso.with(context).load(urlList.url2).fit().centerCrop().into(itemView.image_2)
+            Picasso.with(context).load(urlList.url3).fit().centerCrop().into(itemView.image_3)
         }
     }
 }
