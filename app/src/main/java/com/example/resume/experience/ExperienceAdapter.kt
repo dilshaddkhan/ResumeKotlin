@@ -7,7 +7,7 @@ import com.example.resume.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.experience_item.view.*
 
-// creating the adapter class for the Experience2 fragment and passing two parameters to its object
+// creating the adapter class for the Experience fragment and passing three parameters to its object
 class ExperienceAdapter(var context: Context, var companyInfo: List<Experience>,var companyLogo: List<CompanyLogo>) :
     RecyclerView.Adapter<ExperienceAdapter.MyExperienceViewHolder>() {
 
@@ -19,7 +19,7 @@ class ExperienceAdapter(var context: Context, var companyInfo: List<Experience>,
         return MyExperienceViewHolder(view)
     }
 
-    // this will provide the total no of counts
+    // this will provide the total no of counts of the company
     override fun getItemCount(): Int {
         return companyInfo.size
     }
@@ -27,11 +27,11 @@ class ExperienceAdapter(var context: Context, var companyInfo: List<Experience>,
     //with the help of this we are binding the data to the view
     override fun onBindViewHolder(p0: MyExperienceViewHolder, p1: Int) {
 
-        //this will return the object of Experience2 class
+        //this will return the object of Experience class
         val experienceItem = companyInfo.get(p1)
         val companyLogo=companyLogo.get(p1)
 
-        // with the help of this we are passing the Experience2 data to set on the ui fields
+        // with the help of this we are passing the Experience data to set on the ui fields
         p0.setData(experienceItem,companyLogo)
     }
 

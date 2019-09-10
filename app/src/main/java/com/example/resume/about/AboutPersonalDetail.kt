@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -23,15 +25,16 @@ class AboutPersonalDetail : Fragment() {
 
     // it is used to pass the request code to check on the permission result
     private val permissionCallRequest = 123
-    var name: TextView? = null
-    var designation: TextView? = null
-    var summary: TextView? = null
-    var interest: TextView? = null
-    var linkedin: TextView? = null
-    var github: TextView? = null
-    var skillText: TextView? = null
-    var number: String? = null
-    var email: String? = null
+    private var name: TextView? = null
+    private var designation: TextView? = null
+    private var summary: TextView? = null
+    private var interest: TextView? = null
+    private  var linkedin: TextView? = null
+    private var github: TextView? = null
+    private var skillText: TextView? = null
+    private var number: String? = null
+    private var email: String? = null
+    private var progressBar: ProgressBar? = null
 
     // this function is used to return the object of the AboutPersonalDetail fragment
     companion object {
@@ -50,6 +53,16 @@ class AboutPersonalDetail : Fragment() {
 
         // initialising the root view of the fragment
         val rootView = inflater.inflate(R.layout.fragment_about, container, false)
+
+        // Create progressBar dynamically...
+        progressBar = ProgressBar(context)
+        progressBar!!.layoutParams =
+            LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        val linearLayout = rootView.findViewById<LinearLayout>(R.id.rootContainer)
+        // Add ProgressBar to LinearLayout
+        linearLayout?.addView(progressBar)
+        progressBar!!.visibility
+
         // initialising the call button to call on the number given by the resume owner
         val callMe = rootView!!.findViewById(R.id.call_me) as Button
         // initialising the email button to email
@@ -75,6 +88,8 @@ class AboutPersonalDetail : Fragment() {
             loadAboutData()
         } else {
             var message=getString(R.string.internet_error)
+            val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+            progressBar!!.visibility = visibility
             showAlertPopup(message)
         }
 
@@ -129,7 +144,7 @@ class AboutPersonalDetail : Fragment() {
         }
     }
 
-
+// this method will load the About data of the Resume
     private fun loadAboutData() {
         val resumeServiceInterface = ServiceBuilder.buildService(ResumeServiceInterface::class.java)
         val requestCall = resumeServiceInterface.getAbout()
@@ -139,17 +154,22 @@ class AboutPersonalDetail : Fragment() {
                 if (response?.isSuccessful!!) {
                     val about = response.body()
                     setData(about)
+                    val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+                    progressBar!!.visibility = visibility
                 }
             }
 
             override fun onFailure(call: Call<About>?, t: Throwable?) {
                 var message=getString(R.string.error_msg)
+                val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
+                progressBar!!.visibility = visibility
                 showAlertPopup(message)
             }
         })
     }
 
 
+    // this method will set the data
     private fun setData(about: About) {
         if (about != null) {
             number = about.phone
@@ -164,6 +184,7 @@ class AboutPersonalDetail : Fragment() {
         }
     }
 
+    //this method is used to show the alert dialogue with respect to the event
     private fun showAlertPopup(message:String){
         val builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.heading_msg))
