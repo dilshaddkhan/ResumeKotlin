@@ -22,6 +22,8 @@ import org.junit.runner.RunWith
 @LargeTest
 class MainActivityTest {
 
+
+    // initializing the MainActivity class
     @get:Rule
     var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
 
@@ -35,14 +37,16 @@ class MainActivityTest {
     }
 
 
+    // creating the click test for the navigation tab
     @Test
-    fun changeText_sameActivity() {
+    fun testEventNavigationTag() {
         onView(withId(R.id.navigation)).perform(click())
     }
 
 
+    // creating the click test for the email and call button
     @Test
-    fun testEventFragment() {
+    fun testEventAboutFragment() {
         val scenario = launchFragmentInContainer<AboutPersonalDetail>()
         onView(withId(R.id.call_me))
             .perform(click())

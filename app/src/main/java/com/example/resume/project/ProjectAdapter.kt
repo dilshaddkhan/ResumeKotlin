@@ -37,17 +37,17 @@ class ProjectAdapter(var context: Context,var projects: List<Project>) :
     // inner class to create the custom ui for the adapter of recycler view
     inner class MyProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        // setting of each ProjectsImages data
+        // setting of each Projects data
         fun setData(projects: Project?) {
 
-            // initialising and setting the projectsImages title
+            // initialising and setting the projects title
             itemView.project_title.text = projects!!.projectName
-            // initialising and setting the projectsImages description
+            // initialising and setting the projects description
             itemView.project_playstore_link.text = projects!!.playStoreLink
             itemView.technology_used.text=projects!!.technologies
-            // initialising and setting the projectsImages logo
+            // initialising and setting the projects logo
             Picasso.with(itemView.context).load(projects.companylogo).resize(150, 150).centerInside().into(itemView.project_logo)
-            // initialising and setting the projectsImages images
+            // initialising and setting the projects images
             val urlList=projects.uRLS
             Picasso.with(context).load(urlList.url1).fit().centerCrop().into(itemView.image_1)
             Picasso.with(context).load(urlList.url2).fit().centerCrop().into(itemView.image_2)
