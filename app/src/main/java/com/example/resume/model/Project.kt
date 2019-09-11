@@ -10,5 +10,5 @@ data class Project (
 	@SerializedName("playStoreLink") val playStoreLink : String,
 	@SerializedName("technologies") val technologies : String,
 	@SerializedName("companylogo") val companylogo : String,
-	@SerializedName("URLS") val uRLS : URLS
+	@SerializedName("ScreenShot") val screenShot : ScreenShot
 )
