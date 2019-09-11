@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         // initialising the home fragment which is the AboutPersonalDetails
         createFragmentAboutPersonalDetails()
         // setting up the navigation tab for the important aspects of the resume
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
             // setting up the first tab fragment which is AboutPersonalDetails
             R.id.navigation_about -> {
-
                 //calling the first fragment  which is AboutExperienceDetails
                 createFragmentAboutPersonalDetails()
                 return@OnNavigationItemSelectedListener true
@@ -41,7 +39,6 @@ class MainActivity : AppCompatActivity() {
 
             // setting up the second tab fragment which is AboutPersonalDetails
             R.id.navigation_experience -> {
-
                 //calling the second tab fragment which is AboutExperienceDetails
                 createFragmentAboutExperienceDetails()
                 return@OnNavigationItemSelectedListener true
@@ -49,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
             // setting up the third tab fragment which is AboutProjectDetails
             R.id.navigation_projects -> {
-
                 //calling the second tab fragment which is AboutProjectDetails
                 createFragmentAboutProjectDetails()
                 return@OnNavigationItemSelectedListener true
@@ -79,7 +75,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun createFragmentAboutExperienceDetails() {
         val transaction = manager.beginTransaction()
-
         // initialising the AboutExperienceDetails fragment
         val fragment = AboutExperienceDetails()
         transaction.replace(R.id.content, fragment)
@@ -94,7 +89,6 @@ class MainActivity : AppCompatActivity() {
      */
     private fun createFragmentAboutProjectDetails() {
         val transaction = manager.beginTransaction()
-
         // initialising the AboutProjectDetails fragment
         val fragment = AboutProjectDetails()
         transaction.replace(R.id.content, fragment)

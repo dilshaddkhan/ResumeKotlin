@@ -5,12 +5,12 @@ import retrofit2.http.GET
 // this is a interface to get the result
 interface ResumeServiceInterface {
 
-    @GET("MyResumeJSON/about")
+    @GET("about")
     fun getAbout():Call<About>
 
-    @GET("MyResumeJSON/experiences")
+    @GET("experiences")
     fun getExperience():Call<Experiences>
 
-    @GET("MyResumeJSON/projects")
+    @GET("projects")
     fun getProject():Call<Projects>
 }

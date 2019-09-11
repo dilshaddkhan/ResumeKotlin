@@ -26,10 +26,8 @@ class ExperienceAdapter(var context: Context, var companyInfo: List<Experience>)
 
     //with the help of this we are binding the data to the view
     override fun onBindViewHolder(p0: MyExperienceViewHolder, p1: Int) {
-
         //this will return the object of Experience class
         val experienceItem = companyInfo.get(p1)
-
         // with the help of this we are passing the Experience data to set on the ui fields
         p0.setData(experienceItem)
     }
@@ -38,26 +36,18 @@ class ExperienceAdapter(var context: Context, var companyInfo: List<Experience>)
 
     // inner class to create the custom ui for the adapter of recycler view
     inner class MyExperienceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-
         // setting of each Experience data
         fun setData(experience: Experience?) {
-
             // initialising and setting the experience company
             itemView.company_name.text = experience!!.company
-
             // initialising and setting the experience website
             itemView.website.text = experience.website
-
             // initialising and setting the experience position
             itemView.positions.text = experience.position
-
             // initialising and setting the experience date
             itemView.experience_date.text = experience.startDate+" - "+experience.endDate
-
             // initialising and setting the experience responsibilities
             itemView.responsibility.text = experience.responsibilities
-
             // initialising and setting the companies logo
             Picasso.with(itemView.context).load(experience.companylogo).resize(150, 150).centerInside().into(itemView.experience_logo)
         }
