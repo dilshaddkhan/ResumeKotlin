@@ -36,7 +36,6 @@ class AboutExperienceDetails : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // this is used to invoke the fragment_experience ui xml layout
         val rootView = inflater.inflate(R.layout.fragment_experience, container, false)
         initializeView(rootView)
@@ -74,16 +73,13 @@ class AboutExperienceDetails : Fragment() {
         val requestCall = resumeServiceInterface.getExperience()
         requestCall.enqueue(object : Callback<Experiences> {
             override fun onResponse(call: Call<Experiences>?, response: Response<Experiences>?) {
-
                 if (response?.isSuccessful!!) {
                     val experiences = response.body()
                     setExperienceData(experiences)
                     val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
                     progressBar!!.visibility = visibility
-
                 }
             }
-
             override fun onFailure(call: Call<Experiences>?, t: Throwable?) {
                 var message = getString(R.string.error_msg)
                 val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE

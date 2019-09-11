@@ -52,7 +52,6 @@ class AboutPersonalDetail : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // initialising the root view of the fragment
         val rootView = inflater.inflate(R.layout.fragment_about, container, false)
         // initialising the call button to call on the number given by the resume owner
@@ -109,7 +108,6 @@ class AboutPersonalDetail : Fragment() {
         val requestCall = resumeServiceInterface.getAbout()
         requestCall.enqueue(object : Callback<About> {
             override fun onResponse(call: Call<About>?, response: Response<About>?) {
-
                 if (response?.isSuccessful!!) {
                     val about = response.body()
                     setData(about)
@@ -117,7 +115,6 @@ class AboutPersonalDetail : Fragment() {
                     progressBar!!.visibility = visibility
                 }
             }
-
             override fun onFailure(call: Call<About>?, t: Throwable?) {
                 var message = getString(R.string.error_msg)
                 val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
@@ -141,7 +138,6 @@ class AboutPersonalDetail : Fragment() {
         skillText!!.text = about.skills
         Picasso.with(context).load(about.backgroundimage).resize(150, 150).centerInside()
             .into(backgroundImage)
-
         Picasso.with(context).load(about.profilepic).resize(150, 150).centerInside()
             .into(profilePic)
     }
@@ -156,7 +152,6 @@ class AboutPersonalDetail : Fragment() {
 
     // this method is used to permform the logic when user click on the call button on the screen
     private fun callAction() {
-
         // this condition will check weather the device is requied permission to permform the operation or not
         if (ActivityCompat.checkSelfPermission(
                 activity!!, Manifest.permission.CALL_PHONE

@@ -29,7 +29,6 @@ class ProjectAdapter(var context: Context,var projects: List<Project>) :
     override fun onBindViewHolder(p0: MyProjectViewHolder, p1: Int) {
         //this will return the object of project class
         val projects = projects.get(p1)
-
         // with the help of this we are passing the project data to set on the ui fields
         p0.setData(projects)
     }
@@ -39,7 +38,6 @@ class ProjectAdapter(var context: Context,var projects: List<Project>) :
 
         // setting of each Projects data
         fun setData(projects: Project?) {
-
             // initialising and setting the projects title
             itemView.project_title.text = projects!!.projectName
             // initialising and setting the projects description

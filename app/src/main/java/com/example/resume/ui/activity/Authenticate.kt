@@ -31,12 +31,10 @@ class Authenticate : AppCompatActivity() {
 
     // this method is use to initialize the view content
     private fun initialize() {
-
         email = findViewById(R.id.email) as EditText
         mobileNumber = findViewById(R.id.mobileNumber) as EditText
         name = findViewById(R.id.name) as EditText
         val submit = findViewById(R.id.submit) as Button
-
         submit.setOnClickListener {
             verifyEntry()
         }
@@ -45,7 +43,6 @@ class Authenticate : AppCompatActivity() {
 
     //this metnod is used to check that the email is valid or not
     private fun verifyEntry() {
-
         val textEmail = email!!.text.toString()
         val textMobileNumber = mobileNumber!!.text.toString()
         val textName = name!!.text.toString()

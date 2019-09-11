@@ -33,8 +33,6 @@ class AboutProjectDetails : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         // this is used to invoke the fragment_project ui xml layout
         val rootView = inflater.inflate(R.layout.fragment_project, container, false)
         // this will initialise the recycler view for project container
@@ -49,7 +47,6 @@ class AboutProjectDetails : Fragment() {
         progressBar = ProgressBar(context)
         progressBar!!.layoutParams =
             LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
         val linearLayout = rootView.findViewById<LinearLayout>(R.id.rootContainer)
         // Add ProgressBar to LinearLayout
         linearLayout?.addView(progressBar)
@@ -73,7 +70,6 @@ class AboutProjectDetails : Fragment() {
         val requestCall = resumeServiceInterface.getProject()
         requestCall.enqueue(object : Callback<Projects> {
             override fun onResponse(call: Call<Projects>?, response: Response<Projects>?) {
-
                 if (response?.isSuccessful!!) {
                     val project = response.body()
                     setProjectData(project)
@@ -81,7 +77,6 @@ class AboutProjectDetails : Fragment() {
                     progressBar!!.visibility = visibility
                 }
             }
-
             override fun onFailure(call: Call<Projects>?, t: Throwable?) {
                 var message=getString(R.string.error_msg)
                 val visibility = if (progressBar!!.visibility == View.GONE) View.VISIBLE else View.GONE
