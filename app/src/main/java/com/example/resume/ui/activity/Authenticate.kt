@@ -15,14 +15,15 @@ class Authenticate : AppCompatActivity() {
 
     private var email: EditText? = null
     private var mobileNumber: EditText? = null
-    private var sharedPreference:ResumePreference?=null
+    private var name: EditText? = null
+    private var sharedPreference: ResumePreference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreference=ResumePreference(this)
-        if (sharedPreference!!.checkVerifiedUser(getString(R.string.verified_user),false)){
+        sharedPreference = ResumePreference(this)
+        if (sharedPreference!!.checkVerifiedUser(getString(R.string.verified_user), false)) {
             launchResumeActivity()
-        }else{
+        } else {
             setContentView(R.layout.activity_authenticate)
             initialize()
         }
@@ -33,6 +34,7 @@ class Authenticate : AppCompatActivity() {
 
         email = findViewById(R.id.email) as EditText
         mobileNumber = findViewById(R.id.mobileNumber) as EditText
+        name = findViewById(R.id.name) as EditText
         val submit = findViewById(R.id.submit) as Button
 
         submit.setOnClickListener {
@@ -46,9 +48,10 @@ class Authenticate : AppCompatActivity() {
 
         val textEmail = email!!.text.toString()
         val textMobileNumber = mobileNumber!!.text.toString()
-        if (textEmail.isNotEmpty() && textMobileNumber.isNotEmpty()) {
+        val textName = name!!.text.toString()
+        if (textEmail.isNotEmpty() && textMobileNumber.isNotEmpty() && textName.isNotEmpty()) {
             if (EmailValidator.validateEmail(textEmail)) {
-                sharedPreference!!.setVerifiedUser(getString(R.string.verified_user),true)
+                sharedPreference!!.setVerifiedUser(getString(R.string.verified_user), true)
                 launchResumeActivity()
             } else {
                 showAlertPopup(getString(R.string.invalid_email))
@@ -59,7 +62,7 @@ class Authenticate : AppCompatActivity() {
     }
 
     //this method is used to launch the main activity
-    private fun launchResumeActivity(){
+    private fun launchResumeActivity() {
         intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
         finish()
