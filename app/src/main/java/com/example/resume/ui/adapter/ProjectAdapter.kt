@@ -3,7 +3,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.resume.R
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.project_item.view.*
@@ -46,10 +45,10 @@ class ProjectAdapter(var context: Context,var projects: List<Project>) :
             // initialising and setting the projects logo
             Picasso.with(itemView.context).load(projects.companylogo).resize(150, 150).centerInside().into(itemView.project_logo)
             // initialising and setting the projects images
-            val urlList=projects.uRLS
-            Picasso.with(context).load(urlList.url1).fit().centerCrop().into(itemView.image_1)
-            Picasso.with(context).load(urlList.url2).fit().centerCrop().into(itemView.image_2)
-            Picasso.with(context).load(urlList.url3).fit().centerCrop().into(itemView.image_3)
+            val screenShotUrlList=projects.screenShot
+            Picasso.with(context).load(screenShotUrlList.screenShotURL1).fit().centerCrop().into(itemView.image_1)
+            Picasso.with(context).load(screenShotUrlList.screenShotURL2).fit().centerCrop().into(itemView.image_2)
+            Picasso.with(context).load(screenShotUrlList.screenShotURL3).fit().centerCrop().into(itemView.image_3)
         }
     }
 }

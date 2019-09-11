@@ -88,7 +88,6 @@ class AboutProjectDetails : Fragment() {
 
     //this method will set the pass the project data to the project adapter
     private fun setProjectData(project: Projects) {
-        if (project !=null){
             val totalProject = project.project
             //  this will provide the layout to the recycler view
             projectContainer!!.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
@@ -96,7 +95,6 @@ class AboutProjectDetails : Fragment() {
             val myProjectAdapter = ProjectAdapter(context!!, totalProject)
             //passig the adapter to the recycler view
             projectContainer!!.adapter = myProjectAdapter
-        }
     }
 
     //this method is used to show the alert dialogue with respect to the event
