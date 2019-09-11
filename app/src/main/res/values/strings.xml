@@ -19,5 +19,14 @@
     <string name="invalid_email">Please input valid email address</string>
     <string name="resume_preference">ResumePreference</string>
     <string name="verified_user">Verified User</string>
+    <string name="info_register">Please Register the form to view Resume</string>
+    <string name="name">Name</string>
+    <string name="input_name_hint">please input your name</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="mobile_number_hint">please input your number</string>
+    <string name="email">Email</string>
+    <string name="email_input_hint">please input your email</string>
+    <string name="verify">Verify</string>
+
 </resources>
 

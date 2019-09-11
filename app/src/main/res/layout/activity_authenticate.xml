@@ -20,33 +20,55 @@
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mobile Number"/>
-
-        <EditText
-                android:inputType="phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/mobileNumber"
-                android:hint="please input your number"/>
+                android:text="@string/info_register"/>
 
         <TextView
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email"/>
+                android:text="@string/name"/>
+
+        <EditText
+                android:inputType="textPersonName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:hint="@string/input_name_hint"/>
+
+
+        <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_number"/>
+
+        <EditText
+                android:inputType="phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/mobileNumber"
+                android:hint="@string/mobile_number_hint"/>
+
+        <TextView
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"/>
 
         <EditText
                 android:inputType="textEmailAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/email"
-                android:hint="please input your email"/>
+                android:hint="@string/email_input_hint"/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Verify"
+                android:text="@string/verify"
                 android:id="@+id/submit"
         />
     </LinearLayout>
